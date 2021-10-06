@@ -55,3 +55,25 @@ function pn_taxonomy_args( $args, $taxonomy ) {
     // Return
     return $args;
 }
+// Single book
+        function pn_single_template_content()
+        {
+            global  $post ;
+            echo  '<div class="dearpdf-single-content">' ;
+            echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Hello world![/dearpdf]' ) ;
+            echo  '</div>' ;
+            $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true);
+            echo '<img src=" ' . $post_data['pdfThumb'] . ' "></img>';
+            
+
+        }
+
+        add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
+
+        function pn_before_single_content() {
+            echo 'Before content';
+        }
+
+        add_action( "before_dearpdf_single_content", "pn_before_single_content", 10, 1 );
+
+       
