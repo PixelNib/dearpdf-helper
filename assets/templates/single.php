@@ -1,5 +1,4 @@
 <?php
-
 get_header();
 do_action( "before_dearpdf_single_content" );
 

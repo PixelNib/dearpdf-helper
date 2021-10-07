@@ -56,24 +56,28 @@ function pn_taxonomy_args( $args, $taxonomy ) {
     return $args;
 }
 // Single book
-        function pn_single_template_content()
-        {
-            global  $post ;
-            echo  '<div class="dearpdf-single-content">' ;
-            echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Hello world![/dearpdf]' ) ;
-            echo  '</div>' ;
-            $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true);
-            echo '<img src=" ' . $post_data['pdfThumb'] . ' "></img>';
-            
+    function pn_single_template_content(){
+        global  $post ;
+        ?>
+        <div id="primary" class="content-area primary">
+            <main id="main" class="site-main">
+        <div class="dearpdf-single-content">
+        <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Hello world![/dearpdf]' ) ; ?>
+        <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
+        <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' "></img>'; ?>
+        </div>
+        </main>
+        </div>
+        <?php
+    }
 
-        }
+    add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
 
-        add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
+    function pn_after_single_content() { ?>
 
-        function pn_before_single_content() {
-            echo 'Before content';
-        }
+        <?php get_sidebar('sidebar-1'); ?>
 
-        add_action( "before_dearpdf_single_content", "pn_before_single_content", 10, 1 );
+    <?php }
 
-       
+    add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
+
