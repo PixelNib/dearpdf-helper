@@ -13,16 +13,16 @@
  */
 
 
-//Adding tags to cpt
-function reg_tag() {
-    register_taxonomy_for_object_type('post_tag', 'dearpdf');
-}
-add_action('init', 'reg_tag');
+    //Adding tags to cpt
+    function reg_tag() {
+        register_taxonomy_for_object_type('post_tag', 'dearpdf');
+    }
+    add_action('init', 'reg_tag');
 
 
-//Fixing slug for CPT
-add_filter( 'register_taxonomy_args', 'pn_taxonomy_args', 10, 2 );
-function pn_taxonomy_args( $args, $taxonomy ) {
+    //Fixing slug for CPT
+    add_filter( 'register_taxonomy_args', 'pn_taxonomy_args', 10, 2 );
+    function pn_taxonomy_args( $args, $taxonomy ) {
 
     // Target "my-taxonomy"
     if ( 'dearpdf_category' !== $taxonomy ) {
@@ -50,6 +50,7 @@ function pn_taxonomy_args( $args, $taxonomy ) {
     $args = array(
             'labels' => $labels,
             'rewrite' => array('slug' => "books"),
+            'hierarchical' => true,
     );
 
     // Return
