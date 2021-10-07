@@ -13,16 +13,16 @@
  */
 
 
-//Adding tags to cpt
-function reg_tag() {
-    register_taxonomy_for_object_type('post_tag', 'dearpdf');
-}
-add_action('init', 'reg_tag');
+    //Adding tags to cpt
+    function reg_tag() {
+        register_taxonomy_for_object_type('post_tag', 'dearpdf');
+    }
+    add_action('init', 'reg_tag');
 
 
-//Fixing slug for CPT
-add_filter( 'register_taxonomy_args', 'pn_taxonomy_args', 10, 2 );
-function pn_taxonomy_args( $args, $taxonomy ) {
+    //Fixing slug for CPT
+    add_filter( 'register_taxonomy_args', 'pn_taxonomy_args', 10, 2 );
+    function pn_taxonomy_args( $args, $taxonomy ) {
 
     // Target "my-taxonomy"
     if ( 'dearpdf_category' !== $taxonomy ) {
@@ -50,30 +50,93 @@ function pn_taxonomy_args( $args, $taxonomy ) {
     $args = array(
             'labels' => $labels,
             'rewrite' => array('slug' => "books"),
+            'hierarchical' => true,
     );
 
     // Return
     return $args;
 }
+
+
 // Single book
-        function pn_single_template_content()
-        {
-            global  $post ;
-            echo  '<div class="dearpdf-single-content">' ;
-            echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Hello world![/dearpdf]' ) ;
-            echo  '</div>' ;
-            $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true);
-            echo '<img src=" ' . $post_data['pdfThumb'] . ' "></img>';
+function pn_single_template_content(){
+    global  $post ;
+    ?>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="container col-xxl-8 px-4 py-5">
+                <div class="row g-5 py-5">
+                    <div class="col-10 col-sm-8 col-lg-4">
+                        <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
+                        <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500"></img>'; ?>
+                    </div>
+                    <div class="col-lg-8">
+                        <h2 class="fw-bold lh-1 mb-3"><?php the_title(); ?></h2>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Open Book[/dearpdf]' ) ; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php
+}
+
+add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
+
+    function pn_after_single_content() { ?>
+        <div class="col-md-4">
+            <?php get_sidebar('books-sidebar'); ?>
+        </div> 
+    </div> <!-- Closing row div -->
+    <?php }
+
+add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
+
+    
+    //Enque bootstrap
+	function hook_javascript() {
+        ?>
             
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    
+            <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+    
+        <?php
+    }
+    add_action('wp_head', 'hook_javascript');
 
-        }
 
-        add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
+    /**
+ * Register sidebar area
+ */
+function wpdocs_theme_slug_widgets_init() {
+    register_sidebar( array(
+        'name'          => __( 'Books Sidebar', 'textdomain' ),
+        'id'            => 'books-sidebar',
+        'description'   => __( 'Widgets in this area will be shown on all books and category pages.', 'textdomain' ),
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</li>',
+        'before_title'  => '<h2>',
+        'after_title'   => '</h2>',
+    ) );
+}
+add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
-        function pn_before_single_content() {
-            echo 'Before content';
-        }
 
-        add_action( "before_dearpdf_single_content", "pn_before_single_content", 10, 1 );
+//Equeue styles from assets
+function pn_add_to_head() {
+ 
+    //wp_enqueue_script('jquery');
+ 
+    wp_register_style( 'dearpdf-helper', plugin_dir_url( __FILE__ ) . '/assets/css/style.css','','', 'screen' );
+ 
+    wp_enqueue_style( 'dearpdf-helper' );
+ 
+}
+ 
+add_action( 'wp_enqueue_scripts', 'pn_add_to_head' );
 
-       
+    
