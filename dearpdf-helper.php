@@ -62,10 +62,9 @@
 function pn_single_template_content(){
     global  $post ;
     ?>
-    <div class="row">
+    <div class="row mt-5">
         <div class="col-md-8">
-            <div class="container col-xxl-8 px-4 py-5">
-                <div class="row g-5 py-5">
+                <div class="row">
                     <div class="col-10 col-sm-8 col-lg-4">
                         <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
                         <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500"></img>'; ?>
@@ -76,7 +75,6 @@ function pn_single_template_content(){
                             <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Open Book[/dearpdf]' ) ; ?>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
 
@@ -86,30 +84,27 @@ function pn_single_template_content(){
 add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
 
     function pn_after_single_content() { ?>
-        <div class="col-md-4">
-            <?php get_sidebar('books-sidebar'); ?>
-        </div> 
+        <aside class="col-md-4">
+            <?php dynamic_sidebar('books-sidebar'); ?>
+        </aside>
     </div> <!-- Closing row div -->
     <?php }
 
 add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
 
-    
+
     //Enque bootstrap
 	function hook_javascript() {
         ?>
-            
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-    
-            <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
-    
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+
         <?php
     }
     add_action('wp_head', 'hook_javascript');
 
-
-    /**
+/**
  * Register sidebar area
  */
 function wpdocs_theme_slug_widgets_init() {
@@ -117,8 +112,8 @@ function wpdocs_theme_slug_widgets_init() {
         'name'          => __( 'Books Sidebar', 'textdomain' ),
         'id'            => 'books-sidebar',
         'description'   => __( 'Widgets in this area will be shown on all books and category pages.', 'textdomain' ),
-        'before_widget' => '<li id="%1$s" class="widget %2$s">',
-        'after_widget'  => '</li>',
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
         'before_title'  => '<h2>',
         'after_title'   => '</h2>',
     ) );
@@ -128,15 +123,14 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
 //Equeue styles from assets
 function pn_add_to_head() {
- 
+
     //wp_enqueue_script('jquery');
- 
+
     wp_register_style( 'dearpdf-helper', plugin_dir_url( __FILE__ ) . '/assets/css/style.css','','', 'screen' );
- 
+
     wp_enqueue_style( 'dearpdf-helper' );
- 
+
 }
- 
+
 add_action( 'wp_enqueue_scripts', 'pn_add_to_head' );
 
-    
