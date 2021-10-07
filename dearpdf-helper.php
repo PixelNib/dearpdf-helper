@@ -56,32 +56,43 @@
     // Return
     return $args;
 }
-// Single book
-    function pn_single_template_content(){
-        global  $post ;
-        ?>
-        <div id="primary" class="content-area primary">
-            <main id="main" class="site-main">
-        <div class="dearpdf-single-content">
-        <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Hello world![/dearpdf]' ) ; ?>
-        <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
-        <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' "></img>'; ?>
-        </div>
-        </main>
-        </div>
-        <?php
-    }
 
-    add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
+
+// Single book
+function pn_single_template_content(){
+    global  $post ;
+    ?>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="container col-xxl-8 px-4 py-5">
+                <div class="row g-5 py-5">
+                    <div class="col-10 col-sm-8 col-lg-4">
+                        <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
+                        <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500"></img>'; ?>
+                    </div>
+                    <div class="col-lg-8">
+                        <h2 class="fw-bold lh-1 mb-3"><?php the_title(); ?></h2>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                            <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Open Book[/dearpdf]' ) ; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php
+}
+
+add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
 
     function pn_after_single_content() { ?>
-
-        <?php get_sidebar('sidebar-1'); ?>
-
+        <div class="col-md-4">
+            <?php get_sidebar('books-sidebar'); ?>
+        </div> 
+    </div> <!-- Closing row div -->
     <?php }
 
-    add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
-
+add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
 
     
     //Enque bootstrap
@@ -96,4 +107,36 @@
         <?php
     }
     add_action('wp_head', 'hook_javascript');
+
+
+    /**
+ * Register sidebar area
+ */
+function wpdocs_theme_slug_widgets_init() {
+    register_sidebar( array(
+        'name'          => __( 'Books Sidebar', 'textdomain' ),
+        'id'            => 'books-sidebar',
+        'description'   => __( 'Widgets in this area will be shown on all books and category pages.', 'textdomain' ),
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</li>',
+        'before_title'  => '<h2>',
+        'after_title'   => '</h2>',
+    ) );
+}
+add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
+
+
+//Equeue styles from assets
+function pn_add_to_head() {
+ 
+    //wp_enqueue_script('jquery');
+ 
+    wp_register_style( 'dearpdf-helper', plugin_dir_url( __FILE__ ) . '/assets/css/style.css','','', 'screen' );
+ 
+    wp_enqueue_style( 'dearpdf-helper' );
+ 
+}
+ 
+add_action( 'wp_enqueue_scripts', 'pn_add_to_head' );
+
     
