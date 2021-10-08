@@ -99,7 +99,6 @@ add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
         <!-- JavaScript Bundle with Popper -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
-
         <?php
     }
     add_action('wp_head', 'hook_javascript');
@@ -123,13 +122,9 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
 //Equeue styles from assets
 function pn_add_to_head() {
-
-    //wp_enqueue_script('jquery');
-
-    wp_register_style( 'dearpdf-helper', plugin_dir_url( __FILE__ ) . '/assets/css/style.css','','', 'screen' );
-
-    wp_enqueue_style( 'dearpdf-helper' );
-
+    if ( is_singular('dearpdf') ) {
+            wp_enqueue_style( 'dearpdf-helper', plugins_url( '/assets/css/style.css', __FILE__ ) );
+    }
 }
 
 add_action( 'wp_enqueue_scripts', 'pn_add_to_head' );
