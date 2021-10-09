@@ -118,25 +118,43 @@ function wpdocs_theme_slug_widgets_init() {
 }
 add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
-
 /**
  * Function to show the category hierarchy
  * Usage: By default, shortcodes are not allowed to be executed in a custom HTML widget so, you have to use the HTML widghet and add this shortcode [gb_system].
  * Styled using Bootstrap
  */
-
 function gautam_brothers_system(){
-    $terms = get_terms('dearpdf_category',array('parent' => 0 , 'hide_empty'=> '0' ));
-    $count = count($terms);
-    if ( $count > 0 ){
-        echo '<ul class="list-unstyled ps-0">';
-        foreach ( $terms as $term ) {
-            echo ' <li class="mb-1"><button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#' .  $term->slug . '" aria-expanded="true" href="' . esc_url( get_term_link( $term ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'my_localization_domain' ), $term->name ) ) . '">'.$term->name.'</button></li>';
-            $terms1 = get_terms('dearpdf_category',array('parent' => $term->term_id , 'hide_empty'=> '0' ));
-                foreach ($terms1 as $term1) {
-                    echo '<div class="collapse show" id="' .  $term->slug . '"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"><li><a class="link-dark rounded" href="'.get_category_link($term1->term_id).'">'.$term1->name.'</a></li></ul></div>';
+    $book_category = get_terms( 'dearpdf_category', array(
+        'hide_empty' => 0,
+        ) );
+
+        $subcategories = $subsubcategories = $book_category;
+
+        foreach ( $book_category as $category ) {
+            if ( 0 != $category->parent ) {
+                continue;
+            }
+
+        echo '<ul>';
+        foreach ( $subcategories as $subcategory ) {
+            if ( $category->term_id != $subcategory->parent ) {
+                continue;
+            }
+
+            echo '<li id="subject" class="mb-1"><button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#' .  $subcategory->slug . '" aria-expanded="false" href="' . esc_url( get_term_link( $subcategory ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'astra' ), $subcategory->name ) ) . '">' . $subcategory->name . '</button></li>';
+            echo '<div class="collapse show" id="' .  $subcategory->slug . '"><ul id="books" class="btn-toggle-nav list-unstyled fw-normal pb-1 small">';
+
+            foreach ( $subsubcategories as $subsubcategory ) {
+                if ( $subcategory->term_id != $subsubcategory->parent ) {
+                    continue;
                 }
+
+                echo '<li id="list"><a class="link-dark rounded" href="'.get_category_link($subsubcategory->term_id).'">' . $subsubcategory->name . '</a></li>';
+            }
+
+            echo '</ul></div>';
         }
+
         echo '</ul>';
     }
 }
