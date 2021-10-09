@@ -93,15 +93,14 @@ add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
 add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
 
 
-    //Enque bootstrap
-	function hook_javascript() {
-        ?>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
-        <!-- JavaScript Bundle with Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
-        <?php
-    }
-    add_action('wp_head', 'hook_javascript');
+//Enque bootstrap
+function hook_javascript() { ?>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+
+<?php } add_action('wp_head', 'hook_javascript');
 
 /**
  * Register sidebar area
@@ -119,6 +118,30 @@ function wpdocs_theme_slug_widgets_init() {
 }
 add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
+
+/**
+ * Function to show the category hierarchy
+ * Usage: By default, shortcodes are not allowed to be executed in a custom HTML widget so, you have to use the HTML widghet and add this shortcode [gb_system].
+ * Styled using Bootstrap
+ */
+
+function gautam_brothers_system(){
+    $terms = get_terms('dearpdf_category',array('parent' => 0 , 'hide_empty'=> '0' ));
+    $count = count($terms);
+    if ( $count > 0 ){
+        echo '<ul class="list-unstyled ps-0">';
+        foreach ( $terms as $term ) {
+            echo ' <li class="mb-1"><button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#' .  $term->slug . '" aria-expanded="true" href="' . esc_url( get_term_link( $term ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'my_localization_domain' ), $term->name ) ) . '">'.$term->name.'</button></li>';
+            $terms1 = get_terms('dearpdf_category',array('parent' => $term->term_id , 'hide_empty'=> '0' ));
+                foreach ($terms1 as $term1) {
+                    echo '<div class="collapse show" id="' .  $term->slug . '"><ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small"><li><a class="link-dark rounded" href="'.get_category_link($term1->term_id).'">'.$term1->name.'</a></li></ul></div>';
+                }
+        }
+        echo '</ul>';
+    }
+}
+
+add_shortcode('gb_system', 'gautam_brothers_system');
 
 //Equeue styles from assets
 function pn_add_to_head() {
