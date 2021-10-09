@@ -1,4 +1,4 @@
-d<?php
+<?php
 /**
  * Plugin Name:     Dearpdf Helper
  * Plugin URI:      https://pixelnib.com
@@ -62,14 +62,14 @@ d<?php
 function pn_single_template_content(){
     global  $post ;
     ?>
-    <div class="row mt-5">
+    <div class="row my-5 p-5">
         <div class="col-md-8">
                 <div class="row">
-                    <div class="col-10 col-sm-8 col-lg-4">
+                    <div class="col-sm-4">
                         <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
                         <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500"></img>'; ?>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-sm-8">
                         <h2 class="fw-bold lh-1 mb-3"><?php the_title(); ?></h2>
                         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
                             <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Open Book[/dearpdf]' ) ; ?>
@@ -164,13 +164,6 @@ add_shortcode('gb_system', 'gautam_brothers_system');
 
 
 
-
-function gb_category_page_title() {
-    the_archive_title('<h1>', '</h1>');
-}
-
-add_action('before_dearpdf_category_content', 'gb_category_page_title');
-
 /**
  * Function to open single page from the Category page.
  */
@@ -188,12 +181,14 @@ function pn_category_single_template_content(){
         'terms'    => $current_term->slug,
     ) ),
     ) );
-    echo '<div class="row">';
+    echo '<div class="row my-5 p-5">';
+    
+    the_archive_title('<h1 class="pb-5">', '</h1>');
 
     if ( count( $postslist ) > 0 ) {
         foreach ( $postslist as $post ) {
             $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true);
-            echo '<div class="col-md-3">';
+            echo '<div class="col-lg-2 col-md-3 col-sm-6">';
             echo '<a href="' . get_permalink( $post->ID ) . '">';
             echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block img-fluid img-thumbnail"></img>';
             echo '</a>';
@@ -211,7 +206,7 @@ add_action( 'dearpdf_category_content','pn_category_single_template_content' );
 function pn_add_to_head() {
     if ( is_singular('dearpdf') || is_archive( 'dearpdf' ) ) {
             wp_enqueue_style( 'dearpdf-helper', plugins_url( '/assets/css/style.css', __FILE__ ) );
-            wp_enqueue_script( 'dearpdf-helper', plugins_url( '/assets/js/script.js', __FILE__ ) );
+            wp_enqueue_script( 'dearpdf-helper', plugins_url( '/assets/js/script.js', __FILE__ , array('jquery')) );
     }
 }
 
