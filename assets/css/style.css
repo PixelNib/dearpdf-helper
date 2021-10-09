@@ -1,4 +1,5 @@
-.dearpdf-template-default.single.single-dearpdf .dearpdf-single-content {
+.dearpdf-template-default.single.single-dearpdf .dearpdf-single-content,
+.archive.tax-dearpdf_category .dearpdf-single-content {
     display: none !important;
 }
 
