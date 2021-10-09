@@ -124,6 +124,7 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 function pn_add_to_head() {
     if ( is_singular('dearpdf') ) {
             wp_enqueue_style( 'dearpdf-helper', plugins_url( '/assets/css/style.css', __FILE__ ) );
+            wp_enqueue_script( 'dearpdf-helper', plugins_url( '/assets/js/script.js', __FILE__ ) );
     }
 }
 
