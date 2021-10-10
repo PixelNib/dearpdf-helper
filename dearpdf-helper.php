@@ -126,7 +126,10 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 function gautam_brothers_system(){
     $book_category = get_terms( 'dearpdf_category', array(
         'hide_empty' => 0,
-        ) );
+        'exclude' => 70, // Hard code the cat. id which you want to exclude
+        'orderby' => 'name',
+        'order' => 'ASC',
+    ) );
 
         $subcategories = $subsubcategories = $book_category;
 
@@ -143,6 +146,7 @@ function gautam_brothers_system(){
 
             echo '<li id="subject" class="mb-1"><button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#' .  $subcategory->slug . '" aria-expanded="false" href="' . esc_url( get_term_link( $subcategory ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'astra' ), $subcategory->name ) ) . '">' . $subcategory->name . '</button></li>';
             echo '<div class="collapse show" id="' .  $subcategory->slug . '"><ul id="books" class="btn-toggle-nav list-unstyled fw-normal pb-1 small">';
+
 
             foreach ( $subsubcategories as $subsubcategory ) {
                 if ( $subcategory->term_id != $subsubcategory->parent ) {
