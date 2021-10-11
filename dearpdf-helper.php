@@ -164,7 +164,7 @@ function gautam_brothers_system(){
             }
 
             echo '<li id="subject" class="mb-1"><button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#' .  $subcategory->slug . '" aria-expanded="false" href="' . esc_url( get_term_link( $subcategory ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'astra' ), $subcategory->name ) ) . '">' . $subcategory->name . '</button></li>';
-            echo '<div class="collapse show" id="' .  $subcategory->slug . '"><ul id="books" class="btn-toggle-nav list-unstyled fw-normal pb-1 small">';
+            echo '<div class="collapse" id="' .  $subcategory->slug . '"><ul id="books" class="btn-toggle-nav list-unstyled fw-normal pb-1 small">';
 
 
             foreach ( $subsubcategories as $subsubcategory ) {
