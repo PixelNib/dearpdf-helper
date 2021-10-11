@@ -1,115 +1,151 @@
 .dearpdf-template-default.single.single-dearpdf .dearpdf-single-content,
 .archive.tax-dearpdf_category .dearpdf-single-content {
-    display: none !important;
+	display: none !important;
+}
+
+.dearpdf-template-default.single.single-dearpdf .site-content {
+	background-color: #f5f5f5;
 }
 
 .bi {
-    vertical-align: -.125em;
-    pointer-events: none;
-    fill: currentColor;
-  }
+	vertical-align: -0.125em;
+	pointer-events: none;
+	fill: currentColor;
+}
 
-  .dropdown-toggle { outline: 0; }
+.dropdown-toggle {
+	outline: 0;
+}
 
-  .nav-flush .nav-link {
-    border-radius: 0;
-  }
+.nav-flush .nav-link {
+	border-radius: 0;
+}
 
-  .btn-toggle {
-    display: inline-flex;
-    align-items: center;
-    padding: .25rem .5rem;
-    font-weight: 600;
-    color: rgba(0, 0, 0, .65);
-    background-color: transparent;
-    border: 0;
-  }
-  .btn-toggle:hover,
-  .btn-toggle:focus {
-    color: rgba(0, 0, 0, .85);
-    background-color: #d2f4ea;
-  }
+.btn-toggle {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.25rem 0.5rem;
+	font-weight: 600;
+	color: rgba(0, 0, 0, 0.65);
+	background-color: transparent;
+	border: 0;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+	color: rgba(0, 0, 0, 0.85);
+	background-color: #d2f4ea;
+}
 
-  .btn-toggle::before {
-    display: inline-block;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    content: "\f054";
-    transition: transform .35s ease;
-    transform-origin: .5em 50%;
-    margin-right: 8px;
-  }
+#subject .btn-toggle::before {
+	width: 2.25em;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	content: "\f054";
+}
 
-  .btn-toggle[aria-expanded="true"] {
-    color: rgba(0, 0, 0, .85);
-  }
-  .btn-toggle[aria-expanded="true"]::before {
-    transform: rotate(90deg);
-  }
+#subject .btn:focus{
+  box-shadow: none;
+}
 
-  .btn-toggle-nav a {
-    display: inline-flex;
-    padding: .1875rem .5rem;
-    margin-top: .125rem;
-    margin-left: 1.25rem;
-    text-decoration: none;
-  }
-  .btn-toggle-nav a:hover,
-  .btn-toggle-nav a:focus {
-    background-color: #d2f4ea;
-  }
+#subject .btn-toggle {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.25rem 0.5rem;
+	font-weight: 600;
+	color: rgba(0, 0, 0, 0.65);
+	background-color: transparent;
+	border: 0;
+}
 
-  .scrollarea {
-    overflow-y: auto;
-  }
+ul#books #list a:hover,
+ul#books #list a:focus {
+  background-color: transparent;
+}
+.btn-toggle[aria-expanded="true"] {
+	color: rgba(0, 0, 0, 0.85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+	transform: rotate(90deg);
+}
 
-  .fw-semibold { font-weight: 600; }
-  .lh-tight { line-height: 1.25; }
+.btn-toggle-nav a {
+	display: inline-flex;
+	padding: 0.1875rem 0.5rem;
+	margin-top: 0.125rem;
+	margin-left: 1.25rem;
+	text-decoration: none;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+	background-color: #d2f4ea;
+}
 
-  div.gb-page-divider {
-    width: 15%;
-    height: 5px;
-    background-color: #001688;
-  }
+.scrollarea {
+	overflow-y: auto;
+}
 
-  aside {
-    margin: 5px;
-  }
+.fw-semibold {
+	font-weight: 600;
+}
+.lh-tight {
+	line-height: 1.25;
+}
 
-  h3.book-title {
-    color: #444444;
-    font-family: "Rubik", Sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    line-height: 1.4;
-  }
+div.gb-page-divider {
+	width: 15%;
+	height: 5px;
+	background-color: #001688;
+}
 
-  .dearpdf-template-default.single.single-dearpdf .dp-element {
-    background-color: transparent;
-    border-width: 2px;
-    border-style: solid;
-    padding: 7px 24px;
-    border-color: #001688;
-    color: #001688;
-    margin-top: 10px;
-    -webkit-transition: all .3s;
-    -o-transition: all .3s;
-    transition: all .3s;
-    font-weight: 700;
-  }
-  .dearpdf-template-default.single.single-dearpdf .dp-element:hover {
-    background-color: #001688;
-    color: #fff;
-  }
+aside {
+	margin: 5px;
+}
 
-  ul#books {
-    list-style-type:disc;
-  }
+aside h4 {
+  background-color: #333;
+  color: #fff;
+}
 
-  ul#books #list a {
-    margin-left: 0;
-  }
+h3.book-title {
+	color: #444444;
+	font-family: "Rubik", Sans-serif;
+	font-weight: 600;
+	text-transform: uppercase;
+	line-height: 1.4;
+}
+
+.dearpdf-template-default.single.single-dearpdf .dp-element {
+	background-color: transparent;
+	border-width: 2px;
+	border-style: solid;
+	padding: 7px 24px;
+	border-color: #001688;
+	color: #001688;
+	margin-top: 10px;
+	-webkit-transition: all 0.3s;
+	-o-transition: all 0.3s;
+	transition: all 0.3s;
+	font-weight: 700;
+}
+.dearpdf-template-default.single.single-dearpdf .dp-element:hover {
+	background-color: #001688;
+	color: #fff;
+}
+
+ul#books {
+	list-style-type: disc;
+}
+
+ul#books #list a {
+	margin-left: 0;
+}
+
+#subjest a {
+	display: inline-flex;
+	align-items: center !important;
+	padding: 0.25rem 0.5rem;
+	font-weight: 600;
+	color: rgba(0, 0, 0, 0.65);
+	background-color: transparent;
+	border: 0;
+}

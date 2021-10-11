@@ -62,16 +62,16 @@
 function pn_single_template_content(){
     global  $post ;
     ?>
-    <div class="row my-5 p-md-5 p-sm-3" style="min-height: 80vh;">
+    <div class="row pb-5 p-md-5 p-sm-3" style="min-height: 80vh;">
         <div class="col-12 col-lg-8">
             <div class="row text-center d-lg-none d-md-block">
-                <h1 class=" fw-semibold px-5"><?php the_title(); ?></h1>
+                <h1 class=" fw-semibold px-5 mt-5"><?php the_title(); ?></h1>
                 <section class="d-flex justify-content-center py-5">
                     <div class="gb-page-divider"></div>
                 </section>
             </div>
             <div class="card rounded-0 mb-3">
-            <div class="row g-0 mt-5 mt-lg-0">
+            <div class="row g-0">
                 <div class="col-12 col-md-5">
                     <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
                     <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="img-fluid rounded-start" alt="book-cover" width="700" height="500"></img>'; ?>
@@ -97,11 +97,9 @@ function pn_single_template_content(){
         <?php
 
     function pn_after_single_content() { ?>
-            <div class="col-12 col-lg-4 bg-light bg-light mt-5 mt-lg-0">
-                <aside>
-                <div class="row">
-                    <h4 class="text-white py-3 bg-primary">Browse By Subject</h4>
-                </div>
+            <div class="col-12 col-lg-4">
+                <aside class="mx-3 mx-lg-5 mt-5 mt-lg-0 bg-light">
+                    <h4 class="p-4 fw-normal">Browse By Subject</h4>
                 <?php dynamic_sidebar('books-sidebar'); ?>
                 </aside>
             </div>
@@ -166,7 +164,7 @@ function gautam_brothers_system(){
             }
 
             echo '<li id="subject" class="mb-3"><a class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#' .  $subcategory->slug . '" aria-expanded="false" href="' . esc_url( get_term_link( $subcategory ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'astra' ), $subcategory->name ) ) . '">' . $subcategory->name . '</a></li>';
-            echo '<div class="collapse" id="' .  $subcategory->slug . '"><ul id="books" class="btn-toggle-nav fw-normal pb-3 small">';
+            echo '<div class="collapse" id="' .  $subcategory->slug . '"><ul id="books" class="btn-toggle-nav fw-normal pb-3 ms-4 small">';
 
 
             foreach ( $subsubcategories as $subsubcategory ) {
@@ -174,7 +172,7 @@ function gautam_brothers_system(){
                     continue;
                 }
 
-                echo '<li id="list"><a class="link-dark rounded" href="'.get_category_link($subsubcategory->term_id).'">' . $subsubcategory->name . '</a></li>';
+                echo '<li id="list"><a class="" href="'.get_category_link($subsubcategory->term_id).'">' . $subsubcategory->name . '</a></li>';
             }
 
             echo '</ul></div>';
