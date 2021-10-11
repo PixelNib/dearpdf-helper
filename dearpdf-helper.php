@@ -63,13 +63,19 @@ function pn_single_template_content(){
     global  $post ;
     ?>
     <div class="row my-5 p-md-5 p-sm-3" style="min-height: 80vh;">
-        <div class="col-12 col-md-8">
-            <div class="row">
-                <div class="col col-3">
-                    <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?> 
+        <div class="col-12 col-lg-8">
+            <div class="row text-center d-lg-none d-md-block">
+                <h1 class="elementor-heading-title elementor-size-default fw-bold"><?php the_title(); ?></h1>
+                <section class="d-flex justify-content-center py-5">
+                    <div class="gb-page-divider"></div>
+                </section>
+            </div>
+            <div class="row px-5 mt-5 mt-lg-0">
+                <div class="col-12 col-md-5">
+                    <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
                     <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block mx-lg-auto img-fluid" alt="book-cover" width="700" height="500"></img>'; ?>
                 </div>
-                <div class="col">
+                <div class="col-12 col-md-7">
                     <div class="row">
                         <h2 class="fw-bold lh-1"><?php the_title(); ?></h2>
                         <div class="col col-12 mt-2">
@@ -89,21 +95,22 @@ function pn_single_template_content(){
         <?php
 
     function pn_after_single_content() { ?>
-        <div class="col col-md-4 col-sm-12 bg-light">
-            <h4 class="text-center text-white py-3 bg-primary">Browse By Subject</h4>
-            <aside><?php dynamic_sidebar('books-sidebar'); ?></aside>
+        <div class="col-12 col-lg-4 bg-light bg-light mt-5 mt-lg-0">
+            <aside>
+                <div class="row">
+                    <h4 class="text-center text-white py-3 bg-primary">Browse By Subject</h4>
+                </div>
+                <?php dynamic_sidebar('books-sidebar'); ?>
+            </aside>
         </div>
     </div> <!-- Closing row div -->
-    <?php 
+    <?php
     }
 
-    add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );        
+    add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
 }
 
 add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
-
-    
-
 
 //Enque bootstrap
 function hook_javascript() { ?>
@@ -177,9 +184,6 @@ function gautam_brothers_system(){
 
 add_shortcode('gb_system', 'gautam_brothers_system');
 
-
-
-
 /**
  * Function to open single page from the Category page.
  */
@@ -198,7 +202,7 @@ function pn_category_single_template_content(){
     ) ),
     ) );
     echo '<div class="row my-5 p-5">';
-    
+
     the_archive_title('<h1 class="pb-5">', '</h1>');
 
     if ( count( $postslist ) > 0 ) {
@@ -222,7 +226,7 @@ add_action( 'dearpdf_category_content','pn_category_single_template_content' );
 function pn_add_to_head() {
     if ( is_singular('dearpdf') || is_archive( 'dearpdf' ) ) {
             wp_enqueue_style( 'dearpdf-helper', plugins_url( '/assets/css/style.css', __FILE__ ) );
-            wp_enqueue_script( 'dearpdf-helper', plugins_url( '/assets/js/script.js', __FILE__ , array('jquery')) );
+            wp_enqueue_script( 'dearpdf-helper', plugins_url( '/assets/js/script.js', __FILE__ ), array('jquery') );
     }
 }
 

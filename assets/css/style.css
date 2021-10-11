@@ -63,3 +63,9 @@
 
   .fw-semibold { font-weight: 600; }
   .lh-tight { line-height: 1.25; }
+
+  div.gb-page-divider {
+    width: 15%;
+    height: 5px;
+    background-color: #001688;
+  }
