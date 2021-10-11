@@ -62,35 +62,47 @@
 function pn_single_template_content(){
     global  $post ;
     ?>
-    <div class="row my-5 p-5">
-        <div class="col-md-8">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
-                        <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500"></img>'; ?>
-                    </div>
-                    <div class="col-sm-8">
-                        <h2 class="fw-bold lh-1 mb-3"><?php the_title(); ?></h2>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                            <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]Open Book[/dearpdf]' ) ; ?>
+    <div class="row my-5 p-md-5 p-sm-3" style="min-height: 80vh;">
+        <div class="col-12 col-md-8">
+            <div class="row">
+                <div class="col col-3">
+                    <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?> 
+                    <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block mx-lg-auto img-fluid" alt="book-cover" width="700" height="500"></img>'; ?>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h2 class="fw-bold lh-1"><?php the_title(); ?></h2>
+                        <div class="col col-12 mt-2">
+                            <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Sample[/dearpdf]' ) ; ?>
+                        </div>
+                        <div class="col mt-5">
+                            <p>Preview other parts of this series:</p>
+                            <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Part 1 </button>
+                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                            </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
 
-    <?php
+        <?php
+
+    function pn_after_single_content() { ?>
+        <div class="col col-md-4 col-sm-12 bg-light">
+            <h4 class="text-center text-white py-3 bg-primary">Browse By Subject</h4>
+            <aside><?php dynamic_sidebar('books-sidebar'); ?></aside>
+        </div>
+    </div> <!-- Closing row div -->
+    <?php 
+    }
+
+    add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );        
 }
 
 add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
 
-    function pn_after_single_content() { ?>
-        <aside class="col-md-4">
-            <?php dynamic_sidebar('books-sidebar'); ?>
-        </aside>
-    </div> <!-- Closing row div -->
-    <?php }
-
-add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
+    
 
 
 //Enque bootstrap
