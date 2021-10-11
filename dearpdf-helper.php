@@ -65,18 +65,19 @@ function pn_single_template_content(){
     <div class="row my-5 p-md-5 p-sm-3" style="min-height: 80vh;">
         <div class="col-12 col-lg-8">
             <div class="row text-center d-lg-none d-md-block">
-                <h1 class="elementor-heading-title elementor-size-default fw-bold"><?php the_title(); ?></h1>
+                <h1 class=" fw-semibold px-5"><?php the_title(); ?></h1>
                 <section class="d-flex justify-content-center py-5">
                     <div class="gb-page-divider"></div>
                 </section>
             </div>
-            <div class="row px-5 mt-5 mt-lg-0">
+            <div class="card mb-3">
+            <div class="row g-0 mt-5 mt-lg-0">
                 <div class="col-12 col-md-5">
                     <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
-                    <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block mx-lg-auto img-fluid" alt="book-cover" width="700" height="500"></img>'; ?>
+                    <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="img-fluid rounded-start" alt="book-cover" width="700" height="500"></img>'; ?>
                 </div>
                 <div class="col-12 col-md-7">
-                    <div class="row">
+                    <div class="card-body p-5">
                         <h2 class="fw-bold lh-1"><?php the_title(); ?></h2>
                         <div class="col col-12 mt-2">
                             <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Sample[/dearpdf]' ) ; ?>
@@ -87,22 +88,23 @@ function pn_single_template_content(){
                                 <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                             </div>
                         </div>
-                    </div>
+                </div>
                 </div>
             </div>
         </div>
+    </div>
 
         <?php
 
     function pn_after_single_content() { ?>
-        <div class="col-12 col-lg-4 bg-light bg-light mt-5 mt-lg-0">
-            <aside>
+            <div class="col-12 col-lg-4 bg-light bg-light mt-5 mt-lg-0">
+                <aside>
                 <div class="row">
                     <h4 class="text-center text-white py-3 bg-primary">Browse By Subject</h4>
                 </div>
                 <?php dynamic_sidebar('books-sidebar'); ?>
-            </aside>
-        </div>
+                </aside>
+            </div>
     </div> <!-- Closing row div -->
     <?php
     }
