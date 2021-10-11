@@ -31,11 +31,17 @@
   }
 
   .btn-toggle::before {
-    width: 1.25em;
-    line-height: 0;
-    content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f054";
     transition: transform .35s ease;
     transform-origin: .5em 50%;
+    margin-right: 8px;
   }
 
   .btn-toggle[aria-expanded="true"] {
@@ -72,4 +78,38 @@
 
   aside {
     margin: 5px;
+  }
+
+  h3.book-title {
+    color: #444444;
+    font-family: "Rubik", Sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .dearpdf-template-default.single.single-dearpdf .dp-element {
+    background-color: transparent;
+    border-width: 2px;
+    border-style: solid;
+    padding: 7px 24px;
+    border-color: #001688;
+    color: #001688;
+    margin-top: 10px;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+    font-weight: 700;
+  }
+  .dearpdf-template-default.single.single-dearpdf .dp-element:hover {
+    background-color: #001688;
+    color: #fff;
+  }
+
+  ul#books {
+    list-style-type:disc;
+  }
+
+  ul#books #list a {
+    margin-left: 0;
   }

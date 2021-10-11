@@ -70,7 +70,7 @@ function pn_single_template_content(){
                     <div class="gb-page-divider"></div>
                 </section>
             </div>
-            <div class="card mb-3">
+            <div class="card rounded-0 mb-3">
             <div class="row g-0 mt-5 mt-lg-0">
                 <div class="col-12 col-md-5">
                     <?php $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
@@ -78,7 +78,7 @@ function pn_single_template_content(){
                 </div>
                 <div class="col-12 col-md-7">
                     <div class="card-body p-5">
-                        <h2 class="fw-bold lh-1"><?php the_title(); ?></h2>
+                        <h3 class="book-title"><?php the_title(); ?></h3>
                         <div class="col col-12 mt-2">
                             <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Sample[/dearpdf]' ) ; ?>
                         </div>
@@ -100,7 +100,7 @@ function pn_single_template_content(){
             <div class="col-12 col-lg-4 bg-light bg-light mt-5 mt-lg-0">
                 <aside>
                 <div class="row">
-                    <h4 class="text-center text-white py-3 bg-primary">Browse By Subject</h4>
+                    <h4 class="text-white py-3 bg-primary">Browse By Subject</h4>
                 </div>
                 <?php dynamic_sidebar('books-sidebar'); ?>
                 </aside>
@@ -159,14 +159,14 @@ function gautam_brothers_system(){
                 continue;
             }
 
-        echo '<ul>';
+        echo '<ul class="p-3 py-3">';
         foreach ( $subcategories as $subcategory ) {
             if ( $category->term_id != $subcategory->parent ) {
                 continue;
             }
 
-            echo '<li id="subject" class="mb-1"><button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#' .  $subcategory->slug . '" aria-expanded="false" href="' . esc_url( get_term_link( $subcategory ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'astra' ), $subcategory->name ) ) . '">' . $subcategory->name . '</button></li>';
-            echo '<div class="collapse" id="' .  $subcategory->slug . '"><ul id="books" class="btn-toggle-nav list-unstyled fw-normal pb-1 small">';
+            echo '<li id="subject" class="mb-3"><a class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#' .  $subcategory->slug . '" aria-expanded="false" href="' . esc_url( get_term_link( $subcategory ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'astra' ), $subcategory->name ) ) . '">' . $subcategory->name . '</a></li>';
+            echo '<div class="collapse" id="' .  $subcategory->slug . '"><ul id="books" class="btn-toggle-nav fw-normal pb-3 small">';
 
 
             foreach ( $subsubcategories as $subsubcategory ) {
