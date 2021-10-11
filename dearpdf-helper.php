@@ -63,7 +63,7 @@ function pn_single_template_content(){
     global  $post ;
     ?>
     <div class="row pb-5 p-md-5 p-sm-3" style="min-height: 80vh;">
-        <div class="col-12 col-lg-8">
+        <div class="col-12 col-xl-8">
             <div class="row text-center d-lg-none d-md-block">
                 <h1 class=" fw-semibold px-5 mt-5"><?php the_title(); ?></h1>
                 <section class="d-flex justify-content-center py-5">
@@ -97,8 +97,8 @@ function pn_single_template_content(){
         <?php
 
     function pn_after_single_content() { ?>
-            <div class="col-12 col-lg-4">
-                <aside class="mx-3 mx-lg-5 mt-5 mt-lg-0 bg-light">
+            <div class="col-12 col-xl-4">
+                <aside class="mx-3 mx-lg-3 mx-xl-5 mt-5 mt-lg-0 bg-light">
                     <h4 class="p-4 fw-normal">Browse By Subject</h4>
                 <?php dynamic_sidebar('books-sidebar'); ?>
                 </aside>
