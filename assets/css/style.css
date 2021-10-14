@@ -109,6 +109,7 @@ h3.book-title {
 	line-height: 1.4;
 }
 
+.btn-category,
 .dearpdf-template-default.single.single-dearpdf .dp-element {
 	background-color: transparent;
 	border-width: 2px;
@@ -122,9 +123,10 @@ h3.book-title {
 	transition: all 0.3s;
 	font-weight: 700;
 }
+.btn-category,
 .dearpdf-template-default.single.single-dearpdf .dp-element:hover {
 	background-color: #001688;
-	color: #fff;
+	color: #fff!important;
 }
 
 ul#books {
