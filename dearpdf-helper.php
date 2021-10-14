@@ -12,14 +12,6 @@
  * @package         Dearpdf_Helper
  */
 
-
-    //Adding tags to cpt
-    function reg_tag() {
-        register_taxonomy_for_object_type('post_tag', 'dearpdf');
-    }
-    add_action('init', 'reg_tag');
-
-
     //Fixing slug for CPT
     add_filter( 'register_taxonomy_args', 'pn_taxonomy_args', 10, 2 );
     function pn_taxonomy_args( $args, $taxonomy ) {
