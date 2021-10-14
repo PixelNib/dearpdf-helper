@@ -57,6 +57,7 @@
     return $args;
 }
 
+include( plugin_dir_path( __FILE__ ) . 'include/inc/remove-action.php');
 
 // Single book
 function pn_single_template_content(){
@@ -107,10 +108,11 @@ function pn_single_template_content(){
     <?php
     }
 
-    add_action( "after_dearpdf_single_content", "pn_after_single_content", 10, 1 );
+    add_action( "after_dearpdf_single_content", "pn_after_single_content", 9, 1 );
 }
 
-add_action("dearpdf_single_content", "pn_single_template_content", 10, 1);
+add_action("dearpdf_single_content", "pn_single_template_content", 9, 1);
+
 
 //Enque bootstrap
 function hook_javascript() { ?>
@@ -136,6 +138,7 @@ function wpdocs_theme_slug_widgets_init() {
     ) );
 }
 add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
+
 
 /**
  * Function to show the category hierarchy
@@ -184,43 +187,8 @@ function gautam_brothers_system(){
 
 add_shortcode('gb_system', 'gautam_brothers_system');
 
-/**
- * Function to open single page from the Category page.
- */
-
-function pn_category_single_template_content(){
-
-    $current_term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-    $postslist = get_posts( array(
-        'post_type'      => 'dearpdf',
-        'posts_per_page' => -1,
-        'nopaging'       => true,
-        'tax_query'      => array( array(
-        'taxonomy' => 'dearpdf_category',
-        'field'    => 'slug',
-        'terms'    => $current_term->slug,
-    ) ),
-    ) );
-    echo '<div class="row my-5 p-5">';
-
-    the_archive_title('<h1 class="pb-5">', '</h1>');
-
-    if ( count( $postslist ) > 0 ) {
-        foreach ( $postslist as $post ) {
-            $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true);
-            echo '<div class="col-lg-2 col-md-3 col-sm-6">';
-            echo '<a href="' . get_permalink( $post->ID ) . '">';
-            echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="d-block img-fluid img-thumbnail"></img>';
-            echo '</a>';
-            echo  '</div>' ;
-        }
-    } else {
-        echo  '<h1>No Posts Found</h1><br>' ;
-    }
-    echo  '</div>' ;
-}
-
-add_action( 'dearpdf_category_content','pn_category_single_template_content' );
+// PHP Template for category archive page.
+include( plugin_dir_path( __FILE__ ) . 'include/templates/categories-page.php');
 
 //Equeue styles from assets
 function pn_add_to_head() {
@@ -231,4 +199,3 @@ function pn_add_to_head() {
 }
 
 add_action( 'wp_enqueue_scripts', 'pn_add_to_head' );
-
