@@ -33,6 +33,16 @@ function pn_single_template_content(){
                         </div>
                         <div class="col mt-5">
                             <p>Preview other parts of this series:</p>
+                            <?php
+
+    echo get_the_tag_list(
+        '<ul class="my-tags-list"><li>',
+        '</li><li>',
+        '</li></ul>',
+        get_queried_object_id()
+    );
+
+?>
                             <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Part 1 </button>
                                 <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                             </div>

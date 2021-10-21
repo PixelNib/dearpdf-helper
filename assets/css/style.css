@@ -31,25 +31,21 @@
 	background-color: #d2f4ea;
 }
 
-#subject .btn-toggle::before {
-	width: 2.25em;
-	font-family: "Font Awesome 5 Free";
-	font-weight: 900;
-	content: "\f054";
+#subject {
+	border-bottom: 1px dotted #6e6c6c;
 }
 
-#subject .btn:focus{
-  box-shadow: none;
+#subject a {
+	font-weight: 500;
+	color: #333;
 }
 
-#subject .btn-toggle {
-	display: inline-flex;
-	align-items: center;
-	padding: 0.25rem 0.5rem;
-	font-weight: 600;
-	color: rgba(0, 0, 0, 0.65);
-	background-color: transparent;
-	border: 0;
+#subject a:hover {
+	color: #011687;
+}
+
+#subject i {
+	margin-right: 10px;
 }
 
 ul#books #list a:hover,

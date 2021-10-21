@@ -12,6 +12,11 @@
  * @package         Dearpdf_Helper
  */
 
+// function reg_tag() {
+//     register_taxonomy_for_object_type('post_tag', 'dearpdf');
+// }
+// add_action('init', 'reg_tag');
+
     //Fixing slug for CPT
     add_filter( 'register_taxonomy_args', 'pn_taxonomy_args', 10, 2 );
     function pn_taxonomy_args( $args, $taxonomy ) {
@@ -83,51 +88,10 @@ add_action( 'widgets_init', 'wpdocs_theme_slug_widgets_init' );
 
 
 /**
- * Function to show the category hierarchy
- * Usage: By default, shortcodes are not allowed to be executed in a custom HTML widget so, you have to use the HTML widghet and add this shortcode [gb_system].
- * Styled using Bootstrap
+ * Shortcode for sidebar
  */
-function gautam_brothers_system(){
-    $book_category = get_terms( 'dearpdf_category', array(
-        'hide_empty' => 0,
-        'exclude' => 70, // Hard code the cat. id which you want to exclude
-        'orderby' => 'name',
-        'order' => 'ASC',
-    ) );
+include( plugin_dir_path( __FILE__ ) . 'include/shortcode/category-widget.php');
 
-        $subcategories = $subsubcategories = $book_category;
-
-        foreach ( $book_category as $category ) {
-            if ( 0 != $category->parent ) {
-                continue;
-            }
-
-        echo '<ul class="p-3 py-3">';
-        foreach ( $subcategories as $subcategory ) {
-            if ( $category->term_id != $subcategory->parent ) {
-                continue;
-            }
-
-            echo '<li id="subject" class="mb-3"><a class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#' .  $subcategory->slug . '" aria-expanded="false" href="' . esc_url( get_term_link( $subcategory ) ) . '" alt="' . esc_attr( sprintf( __( 'View all post filed under %s', 'astra' ), $subcategory->name ) ) . '">' . $subcategory->name . '</a></li>';
-            echo '<div class="collapse" id="' .  $subcategory->slug . '"><ul id="books" class="btn-toggle-nav fw-normal pb-3 ms-4 small">';
-
-
-            foreach ( $subsubcategories as $subsubcategory ) {
-                if ( $subcategory->term_id != $subsubcategory->parent ) {
-                    continue;
-                }
-
-                echo '<li id="list"><a class="" href="'.get_category_link($subsubcategory->term_id).'">' . $subsubcategory->name . '</a></li>';
-            }
-
-            echo '</ul></div>';
-        }
-
-        echo '</ul>';
-    }
-}
-
-add_shortcode('gb_system', 'gautam_brothers_system');
 
 //Equeue styles from assets
 function pn_add_to_head() {
@@ -138,3 +102,13 @@ function pn_add_to_head() {
 }
 
 add_action( 'wp_enqueue_scripts', 'pn_add_to_head' );
+
+// Include DerarPDF into search result
+function add_df_search( $query ) {
+    if ( !is_admin() && $query->is_main_query() ) {
+      if ( $query->is_search ) {
+        $query->set( 'post_type', array( 'post', 'dearpdf' ) );
+      }
+    }
+  }
+add_action( 'pre_get_posts', 'add_df_search' );
