@@ -12,10 +12,10 @@
  * @package         Dearpdf_Helper
  */
 
-// function reg_tag() {
-//     register_taxonomy_for_object_type('post_tag', 'dearpdf');
-// }
-// add_action('init', 'reg_tag');
+function reg_tag() {
+    register_taxonomy_for_object_type('post_tag', 'dearpdf');
+}
+add_action('init', 'reg_tag');
 
     //Fixing slug for CPT
     add_filter( 'register_taxonomy_args', 'pn_taxonomy_args', 10, 2 );
@@ -96,7 +96,7 @@ include( plugin_dir_path( __FILE__ ) . 'include/shortcode/category-widget.php');
 //Equeue styles from assets
 function pn_add_to_head() {
     if ( is_singular('dearpdf') || is_archive( 'dearpdf' ) ) {
-            wp_enqueue_style( 'dearpdf-helper', plugins_url( '/assets/css/style.css', __FILE__ ) );
+            wp_enqueue_style( 'dearpdf-helper', plugins_url( '/assets/css/style.css', __FILE__, ) );
             wp_enqueue_script( 'dearpdf-helper', plugins_url( '/assets/js/script.js', __FILE__ ), array('jquery') );
     }
 }

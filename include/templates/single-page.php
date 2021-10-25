@@ -33,19 +33,34 @@ function pn_single_template_content(){
                         </div>
                         <div class="col mt-5">
                             <p>Preview other parts of this series:</p>
-                            <?php
+                            <?php $tags = get_tags(); ?>
+                                <?php foreach ( $tags as $tag ) { ?>
+                                    <!-- I don't know how is this working so leave this as it is. Thank you. -->
+                                <?php } ?>
 
-    echo get_the_tag_list(
-        '<ul class="my-tags-list"><li>',
-        '</li><li>',
-        '</li></ul>',
-        get_queried_object_id()
-    );
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle post-list" aria-expanded="false" data-bs-toggle="dropdown" type="button">Select One</button>
+                                <div class="dropdown-menu">
+                                    <?php
+                                        $post_list = get_posts( array(
+                                            'post_type'      => 'dearpdf',
+                                            'posts_per_page' => -1,
+                                            'tag__in' => $tag->term_id,
+                                            )
+                                        );
 
-?>
-                            <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Part 1 </button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
+                                        if ( $post_list ) {
+                                            foreach ( $post_list as $post ) :
+                                            setup_postdata( $post ); ?>
+                                                <!-- <li><a href="<?php // the_permalink(); ?>"><?php // the_title(); ?></a></li> -->
+                                                <a class="dropdown-item" href="#"><?php the_title(); ?></a>
+                                                <?php
+                                                endforeach;
+                                                wp_reset_postdata();
+                                            }
+                                            ?>
+                                </div>
+                        </div>
                         </div>
                 </div>
                 </div>
@@ -57,7 +72,7 @@ function pn_single_template_content(){
 
     function pn_after_single_content() { ?>
             <div class="col-12 col-xl-4">
-                <aside class="mx-3 mx-lg-3 mx-xl-5 mt-5 mt-lg-0 bg-light">
+                <aside class="mx-3 mx-lg-3 mx-xl-4 mt-5 mt-lg-0 bg-light">
                     <h4 class="p-4 fw-normal">Browse By Subject</h4>
                 <?php dynamic_sidebar('books-sidebar'); ?>
                 </aside>

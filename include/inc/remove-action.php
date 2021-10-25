@@ -10,3 +10,10 @@ function remove_action_dp(){
 }
 
 add_action('after_dearpdf_init_templates','remove_action_dp');
+
+if( !function_exists( 'dearpdf_unregister_taxonomy' ) ) {
+    function dearpdf_unregister_taxonomy(){
+        unregister_taxonomy( 'dearpdf_tag' );
+    }
+}
+add_action('init','dearpdf_unregister_taxonomy');
