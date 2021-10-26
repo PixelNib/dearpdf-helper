@@ -33,36 +33,35 @@ function pn_single_template_content(){
                         </div>
                         <div class="col mt-5">
                             <p>Preview other parts of this series:</p>
-                            <?php $tags = get_tags(); ?>
-                                <?php foreach ( $tags as $tag ) { ?>
-                                    <!-- I don't know how is this working so leave this as it is. Thank you. -->
-                                <?php } ?>
-
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle post-list" aria-expanded="false" data-bs-toggle="dropdown" type="button">Select One</button>
+                                <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Select  </button>
                                 <div class="dropdown-menu">
                                     <?php
-                                        $post_list = get_posts( array(
+                                        $posttag = wp_get_post_tags(get_the_ID());
+                                        $first_tag = $posttag[0]->term_id;
+
+                                        $args = array (
                                             'post_type'      => 'dearpdf',
                                             'posts_per_page' => -1,
-                                            'tag__in' => $tag->term_id,
-                                            )
+                                            'tag__in' => array($first_tag),
                                         );
 
-                                        if ( $post_list ) {
-                                            foreach ( $post_list as $post ) :
+                                        $myposts = get_posts( $args );
+
+                                        if ( $myposts ) {
+                                            foreach ( $myposts as $post ) :
                                             setup_postdata( $post ); ?>
-                                                <!-- <li><a href="<?php // the_permalink(); ?>"><?php // the_title(); ?></a></li> -->
-                                                <a class="dropdown-item" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                                                <a class="dropdown-item" href="#"><?php the_title(); ?></a>
                                                 <?php
-                                                endforeach;
-                                                wp_reset_postdata();
-                                            }
-                                            ?>
+
+                                            endforeach;
+
+                                        wp_reset_postdata();
+                                        }
+                                    ?>
                                 </div>
+                            </div>
                         </div>
-                        </div>
-                </div>
+                    </div>
                 </div>
             </div>
         </div>
