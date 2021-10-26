@@ -53,7 +53,7 @@ function pn_single_template_content(){
                                             foreach ( $post_list as $post ) :
                                             setup_postdata( $post ); ?>
                                                 <!-- <li><a href="<?php // the_permalink(); ?>"><?php // the_title(); ?></a></li> -->
-                                                <a class="dropdown-item" href="#"><?php the_title(); ?></a>
+                                                <a class="dropdown-item" href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                                                 <?php
                                                 endforeach;
                                                 wp_reset_postdata();
