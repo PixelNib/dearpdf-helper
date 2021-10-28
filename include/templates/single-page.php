@@ -32,9 +32,8 @@ function pn_single_template_content(){
                             <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Sample[/dearpdf]' ) ; ?>
                         </div>
                         <div class="col mt-5">
-                            <p>Preview other parts of this series:</p>
-                                <div class="dropdown"><button class="btn btn-secondary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Select  </button>
-                                <div class="dropdown-menu">
+                            <label class="pb-3">Preview other parts of this series:</label>
+                                <select id="book-series" class="form-select" aria-label="<?php the_title( ); ?>" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
                                     <?php
                                         $posttag = wp_get_post_tags(get_the_ID());
                                         $first_tag = $posttag[0]->term_id;
@@ -42,6 +41,8 @@ function pn_single_template_content(){
                                         $args = array (
                                             'post_type'      => 'dearpdf',
                                             'posts_per_page' => -1,
+                                            'orderby'       => 'date',
+                                            'order'     => 'ASC',
                                             'tag__in' => array($first_tag),
                                         );
 
@@ -50,7 +51,7 @@ function pn_single_template_content(){
                                         if ( $myposts ) {
                                             foreach ( $myposts as $post ) :
                                             setup_postdata( $post ); ?>
-                                                <a class="dropdown-item" href="#"><?php the_title(); ?></a>
+                                                <option value="<?php the_permalink( ); ?>"><?php the_title(); ?></option>
                                                 <?php
 
                                             endforeach;
@@ -58,8 +59,7 @@ function pn_single_template_content(){
                                         wp_reset_postdata();
                                         }
                                     ?>
-                                </div>
-                            </div>
+                                </select>
                         </div>
                     </div>
                 </div>
