@@ -38,12 +38,21 @@ function pn_single_template_content(){
                                         $posttag = wp_get_post_tags(get_the_ID());
                                         $first_tag = $posttag[0]->term_id;
 
+                                        $postcat = wp_get_post_categories();
+
                                         $args = array (
                                             'post_type'      => 'dearpdf',
                                             'posts_per_page' => -1,
                                             'orderby'       => 'date',
                                             'order'     => 'ASC',
                                             'tag__in' => array($first_tag),
+                                            "tax_query" => array(
+                                                array(
+                                                    "taxonomy" => "dearpdf_category",
+                                                    "field"    => "term_id",
+                                                    "terms"    => array( 106 ), // Add the Categofy ID from which you want to querry
+                                                )
+                                            ),
                                         );
 
                                         $myposts = get_posts( $args );
