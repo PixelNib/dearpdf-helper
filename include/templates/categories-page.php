@@ -33,13 +33,13 @@ function pn_category_single_template_content(){
                 if ( count( $postslist ) > 0 ) {
                     foreach ( $postslist as $post ) {
                         $post_data = get_post_meta( $post->ID, '_dearpdf_data' ,true); ?>
-                            <div class="col-6 col-sm-6 col-lg-4">
+                            <div class="col-6 col-sm-6 col-lg-3">
                                 <div class="card pb-3">
                                     <a href="<?php the_permalink( $post->ID );?>">
                                         <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="img-fluid rounded-start" alt="book-cover" width="700" height="500"></img>'; ?>
                                     </a>
                                     <div class="card-body">
-                                        <h5 class="pb-4" style="border-bottom: 1px solid #ccc; margin-bottom:20px;"><?php echo get_the_title( $post->ID ) ; ?></h5>
+                                        <h6 class="pb-4" style="border-bottom: 1px solid #ccc; margin-bottom:20px;"><?php echo get_the_title( $post->ID ) ; ?></h6>
                                         <a href="<?php the_permalink( $post->ID );?>" class="btn-category">Read Book</a>
                                     </div>
                                 </div>

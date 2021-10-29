@@ -29,7 +29,12 @@ function pn_single_template_content(){
                     <div class="card-body p-5">
                         <h3 class="book-title"><?php the_title(); ?></h3>
                         <div class="col col-12 mt-2">
-                            <?php echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Sample[/dearpdf]' ) ; ?>
+                       <?php if (strpos($_SERVER['REQUEST_URI'], "full") !== false){
+                            echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Fullbook[/dearpdf]' ) ;
+                                } else {
+                            echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Sample[/dearpdf]' ) ;
+                        }
+                        ?>
                         </div>
                         <div class="col mt-5">
                             <label class="pb-3">Preview other parts of this series:</label>
