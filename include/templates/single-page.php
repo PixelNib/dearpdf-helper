@@ -55,7 +55,7 @@ function pn_single_template_content(){
                                                 array(
                                                     "taxonomy" => "dearpdf_category",
                                                     "field"    => "term_id",
-                                                    "terms"    => array( 106 ), // Add the Categofy ID from which you want to querry
+                                                    "terms"    => array( 43 ), // Add the Categofy ID from which you want to querry
                                                 )
                                             ),
                                         );

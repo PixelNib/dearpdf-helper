@@ -39,7 +39,7 @@ function pn_category_single_template_content(){
                                         <?php echo '<img src=" ' . $post_data['pdfThumb'] . ' " class="img-fluid rounded-start" alt="book-cover" width="700" height="500"></img>'; ?>
                                     </a>
                                     <div class="card-body">
-                                        <h6 class="pb-4" style="border-bottom: 1px solid #ccc; margin-bottom:20px;"><?php echo get_the_title( $post->ID ) ; ?></h6>
+                                        <h6 class="pb-4" style="border-bottom: 1px solid #ccc; margin-bottom:20px; font-size: 0.9rem; font-weight: 600;"><?php echo get_the_title( $post->ID ) ; ?></h6>
                                         <a href="<?php the_permalink( $post->ID );?>" class="btn-category">Read Book</a>
                                     </div>
                                 </div>
