@@ -55,8 +55,7 @@ function pn_category_single_template_content(){
     <?php function pn_after_category_content() { ?>
         <div class="col-12 col-xl-4">
             <aside class="mx-3 mx-lg-3 mx-xl-4 mt-5 mt-lg-0 bg-light">
-                <h4 class="p-4 fw-normal">Browse By Subject</h4>
-            <?php dynamic_sidebar('books-sidebar'); ?>
+                <?php dynamic_sidebar('books-sidebar'); ?>
             </aside>
         </div>
     </div> <!-- Closing row div -->

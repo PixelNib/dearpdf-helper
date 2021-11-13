@@ -12,3 +12,9 @@ jQuery(document).ready(function() {
       new bootstrap.Tooltip(tooltipTriggerEl)
     })
   })();
+
+jQuery(document).ready(function($){
+  $("#book-series").change(function () {
+    $("#btn-for-book").attr('href', this.value);
+  });
+});

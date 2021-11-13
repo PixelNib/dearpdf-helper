@@ -141,3 +141,18 @@ ul#books #list a {
 .single-dearpdf button.post-list {
 	box-shadow: none!important;
 }
+
+.drop-down-container {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.drop-down-container select {
+	width: 60%;
+	border-radius: 0;
+}
+
+.drop-down-container a {
+	margin-top: 0;
+}
