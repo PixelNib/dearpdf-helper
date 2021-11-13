@@ -38,7 +38,8 @@ function pn_single_template_content(){
                         </div>
                         <div class="col mt-5">
                             <label class="pb-3">Preview other parts of this series:</label>
-                                <select id="book-series" class="form-select" aria-label="<?php the_title( ); ?>" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                <div class="drop-down-container">
+                                <select id="book-series" class="form-select" aria-label="<?php the_title( ); ?>">
                                     <?php
                                         $posttag = wp_get_post_tags(get_the_ID());
                                         $first_tag = $posttag[0]->term_id;
@@ -67,13 +68,13 @@ function pn_single_template_content(){
                                             setup_postdata( $post ); ?>
                                                 <option value="<?php the_permalink( ); ?>"><?php the_title(); ?></option>
                                                 <?php
-
                                             endforeach;
-
                                         wp_reset_postdata();
                                         }
                                     ?>
                                 </select>
+                                    <a id="btn-for-book" class="btn-category" href="#">Open Book</a>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -86,8 +87,7 @@ function pn_single_template_content(){
     function pn_after_single_content() { ?>
             <div class="col-12 col-xl-4">
                 <aside class="mx-3 mx-lg-3 mx-xl-4 mt-5 mt-lg-0 bg-light">
-                    <h4 class="p-4 fw-normal">Browse By Subject</h4>
-                <?php dynamic_sidebar('books-sidebar'); ?>
+                    <?php dynamic_sidebar('books-sidebar'); ?>
                 </aside>
             </div>
     </div> <!-- Closing row div -->
