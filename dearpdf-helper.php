@@ -55,6 +55,7 @@ add_action('init', 'reg_tag');
 }
 
 include( plugin_dir_path( __FILE__ ) . 'include/inc/remove-action.php');
+include( plugin_dir_path( __FILE__ ) . 'include/inc/dearpdf-metabox.php');
 include( plugin_dir_path( __FILE__ ) . 'include/templates/single-page.php');
 include( plugin_dir_path( __FILE__ ) . 'include/templates/categories-page.php');
 

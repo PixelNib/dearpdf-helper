@@ -2,7 +2,7 @@ jQuery(document).ready(function() {
   jQuery('div.ast-container').attr('id', 'pdf-container');
   jQuery('div#pdf-container').addClass("container");
   jQuery('div#pdf-container').removeClass("ast-container");
-  jQuery( "select#book-series" ).prepend( "<option selected style='display:none'>Open this to select book</option>" );
+  // jQuery( "select#book-series" ).prepend( "<option selected style='display:none'>Open this to select book</option>" );
 });
 
 (function () {

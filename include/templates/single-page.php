@@ -27,13 +27,14 @@ function pn_single_template_content(){
                 </div>
                 <div class="col-12 col-md-7">
                     <div class="card-body p-5">
-                        <h3 class="book-title"><?php the_title(); ?></h3>
+                        <?php $BookSeriesName = get_post_meta( get_the_ID(), 'book-informationbook-series-name', true )?>
+                        <h3 class="book-title"><?php echo $BookSeriesName; ?></h3>
                         <div class="col col-12 mt-2">
-                       <?php if (strpos($_SERVER['REQUEST_URI'], "full") !== false){
-                            echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Fullbook[/dearpdf]' ) ;
-                                } else {
-                            echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Sample[/dearpdf]' ) ;
-                        }
+                       <?php // if (strpos($_SERVER['REQUEST_URI'], "full") !== false){
+                            //echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Fullbook[/dearpdf]' ) ;
+                              //  } else {
+                           // echo  do_shortcode( '[dearpdf type="button" id="' . $post->ID . '"]View Sample[/dearpdf]' ) ;
+                        // }
                         ?>
                         </div>
                         <div class="col mt-5">
@@ -66,7 +67,8 @@ function pn_single_template_content(){
                                         if ( $myposts ) {
                                             foreach ( $myposts as $post ) :
                                             setup_postdata( $post ); ?>
-                                                <option value="<?php the_permalink( ); ?>"><?php the_title(); ?></option>
+                                                <?php $url = get_permalink(); ?>
+                                                <option value="<?php the_permalink( ); ?>#pdf-<?php $slug = basename( get_permalink() ); echo $slug;?>"><?php the_title(); ?></option>
                                                 <?php
                                             endforeach;
                                         wp_reset_postdata();
