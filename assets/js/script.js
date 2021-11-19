@@ -5,13 +5,13 @@ jQuery(document).ready(function() {
   // jQuery( "select#book-series" ).prepend( "<option selected style='display:none'>Open this to select book</option>" );
 });
 
-(function () {
-    'use strict'
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-      new bootstrap.Tooltip(tooltipTriggerEl)
-    })
-  })();
+// (function () {
+//     'use strict'
+//     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+//     tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+//       new bootstrap.Tooltip(tooltipTriggerEl)
+//     })
+//   })();
 
 jQuery(document).ready(function($){
   $("#book-series").change(function () {
